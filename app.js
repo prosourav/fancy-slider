@@ -15,6 +15,7 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
+  toggleFeature();
   imagesArea.style.display = 'block';
   gallery.innerHTML = '';
   // show gallery title
@@ -29,14 +30,15 @@ const showImages = (images) => {
 }
 
 const getImages = (query) => {
+  toggleFeature();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
-    .catch(err => console.log(err))
+    .catch(err =>console.log(err))
+    
 }
 
 
-// superb 1st stage
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
@@ -121,7 +123,7 @@ const changeSlide = (index) => {
 
   items[index].style.display = "block"
 }
-
+// added feature1 of search validation for blank space 
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
@@ -135,7 +137,6 @@ searchBtn.addEventListener('click', function () {
   sliders.length = 0;}
 })
  document.getElementById("search").addEventListener("keypress",function(event){
-   console.log(event.key);
    if(event.key == "Enter"){
    document.getElementById("search-btn").click();
   }
@@ -145,5 +146,8 @@ searchBtn.addEventListener('click', function () {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
-
-
+// added feature2 of spinning 
+const toggleFeature = ()=>{
+ const spinner = document.getElementById("spinner");
+ spinner.classList.toggle('d-none');
+}
